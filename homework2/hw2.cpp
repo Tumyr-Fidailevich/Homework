@@ -1,13 +1,21 @@
-#include "iostream"
+#include <iostream>
+#include <cmath>
 #include <fstream>
-#include <vector>
 
 using namespace std;
 
-float get_coord_x(ifstream &file){
+float dist(float xn, float yn, float x1, float y1) {
+    return fabs((xn * y1 - yn * x1) / (sqrt(xn * xn + yn * yn)));
+}
+
+float angle_sign(float xn, float yn, float x1, float y1) {
+    return xn * y1 - x1 * yn;
+}
+
+float get_coord_x(ifstream &input_file){
     string coord1;
     float x;
-    file >> coord1;
+    input_file >> coord1;
     x = stof(coord1);
     return x;
 }
@@ -20,41 +28,39 @@ float get_coord_y(ifstream &file){
     return y;
 }
 
-float height(float x, float h_0, float v0x, float v0y, float trig){
-    float y = h_0 + x * trig * v0y / v0x - (9.81 / 2) * x * x / (v0x * v0x);
-    return y;
-}
-
 int main() {
-    float y, h, vx, vy, direction = 1;
-    vector<float*> coord;
-    int i = 0;
+    float lmx = 0;
+    float lmy = 0;
+    float rmx = 0;
+    float rmy = 0;
+    float main_x;
+    float main_y;
+    float x = 0;
+    float y = 0;
     string s;
-    
+
     ifstream file("in.txt");
 
-    h = get_coord_x(file);
-    getline(file, s);
-    vx = get_coord_x(file);
-    vy = get_coord_y(file);
-    while(getline(file, s)) {
-        float arr[2];
-        arr[0] = get_coord_x(file);
-        arr[1] = get_coord_y(file);
-        coord.push_back(arr);
-    }
-    while(true){
-        y = height(coord[i][0], h, vx, vy, direction);
-        if (y > coord[i][1]){
-            ++i;
-        }else if(y < 0 or i == coord.size()){
-            break;
-        }else{
-            direction = -1.0f * direction;
-            --i;
+    main_x = get_coord_x(file);
+    main_y = get_coord_y(file);
+    while(getline(file, s)){
+        x = get_coord_x(file);
+        y = get_coord_y(file);
+        if(angle_sign(main_x, main_y, x, y) > 0) {
+            if (dist(main_x, main_y, lmx, lmy) < dist(main_x, main_y, x, y)){
+                lmx = x;
+                lmy = y;
+            }
+        } else if(angle_sign(main_x, main_y, x, y) < 0){
+            if(dist(main_x, main_y, rmx, rmy) < dist(main_x, main_y, x, y)){
+                rmx = x;
+                rmy = y;
+            }
         }
     }
-    cout << i << endl;
+
+    cout << "Leftmost: " << lmx << ' ' << lmy << endl;
+    cout << "Rightmost: " << rmx << ' ' << rmy << endl;
+    file.close();
     return 0;
 }
-
