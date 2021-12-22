@@ -30,35 +30,31 @@ int main() {
     vector<float*> coord;
     int i = 0;
     string s;
-    if (argc == 2){
-        cout << "1st argument: " << argv[1] << endl;
-    }else{
-        ifstream file("in.txt");
+    
+    ifstream file("in.txt");
 
-        h = get_coord_x(file);
-        getline(file, s);
-        vx = get_coord_x(file);
-        vy = get_coord_y(file);
-        while(getline(file, s)) {
-            float arr[2];
-            arr[0] = get_coord_x(file);
-            arr[1] = get_coord_y(file);
-            coord.push_back(arr);
-        }
-        while(true){
-            y = height(coord[i][0], h, vx, vy, direction);
-            if (y > coord[i][1]){
-                ++i;
-            }else if(y < 0 or i == coord.size()){
-                break;
-            }else{
-                direction = -1.0f * direction;
-                --i;
-            }
+    h = get_coord_x(file);
+    getline(file, s);
+    vx = get_coord_x(file);
+    vy = get_coord_y(file);
+    while(getline(file, s)) {
+        float arr[2];
+        arr[0] = get_coord_x(file);
+        arr[1] = get_coord_y(file);
+        coord.push_back(arr);
+    }
+    while(true){
+        y = height(coord[i][0], h, vx, vy, direction);
+        if (y > coord[i][1]){
+            ++i;
+        }else if(y < 0 or i == coord.size()){
+            break;
+        }else{
+            direction = -1.0f * direction;
+            --i;
         }
     }
     cout << i << endl;
     return 0;
 }
-
 
