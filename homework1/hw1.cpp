@@ -35,8 +35,8 @@ int main() {
     float rmy = 0;
     float main_x;
     float main_y;
-    float x;
-    float y;
+    float x = 0;
+    float y = 0;
     string s;
 
     ifstream file("in.txt");
