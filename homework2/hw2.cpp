@@ -25,7 +25,7 @@ float height(float x, float h_0, float v0x, float v0y, float trig){
     return y;
 }
 
-int main(int agrc, char** argv) {
+int main() {
     float y, h, vx, vy, direction = 1;
     vector<float*> coord;
     int i = 0;
