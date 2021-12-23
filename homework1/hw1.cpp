@@ -4,39 +4,39 @@
 
 using namespace std;
 
-float dist(float xn, float yn, float x1, float y1) {
+double dist(double xn, double yn, double x1, double y1) {
     return fabs((xn * y1 - yn * x1) / (sqrt(xn * xn + yn * yn)));
 }
 
-float angle_sign(float xn, float yn, float x1, float y1) {
+double angle_sign(double xn, double yn, double x1, double y1) {
     return xn * y1 - x1 * yn;
 }
 
-float get_coord_x(ifstream &input_file){
+double get_coord_x(ifstream &input_file){
     string coord1;
-    float x;
+    double x;
     input_file >> coord1;
     x = stof(coord1);
     return x;
 }
 
-float get_coord_y(ifstream &file){
+double get_coord_y(ifstream &file){
     string coord2;
-    float y;
+    double y;
     file >> ws >> coord2;
     y = stof(coord2);
     return y;
 }
 
 int main() {
-    float lmx = 0;
-    float lmy = 0;
-    float rmx = 0;
-    float rmy = 0;
-    float main_x;
-    float main_y;
-    float x = 0;
-    float y = 0;
+    double lmx = 0;
+    double lmy = 0;
+    double rmx = 0;
+    double rmy = 0;
+    double main_x;
+    double main_y;
+    double x = 0;
+    double y = 0;
     string s;
 
     ifstream file("in.txt");
@@ -64,4 +64,3 @@ int main() {
     file.close();
     return 0;
 }
-
