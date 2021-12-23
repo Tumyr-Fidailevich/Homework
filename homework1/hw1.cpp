@@ -47,12 +47,12 @@ int main() {
         x = get_coord_x(file);
         y = get_coord_y(file);
         if(angle_sign(main_x, main_y, x, y) > 0) {
-            if (dist(main_x, main_y, lmx, lmy) < dist(main_x, main_y, x, y)){
+            if (dist(main_x, main_y, lmx, lmy) <= dist(main_x, main_y, x, y)){
                 lmx = x;
                 lmy = y;
             }
-        } else if(angle_sign(main_x, main_y, x, y) < 0){
-            if(dist(main_x, main_y, rmx, rmy) < dist(main_x, main_y, x, y)){
+        } else if(angle_sign(main_x, main_y, x, y) <= 0){
+            if(dist(main_x, main_y, rmx, rmy) <= dist(main_x, main_y, x, y)){
                 rmx = x;
                 rmy = y;
             }
